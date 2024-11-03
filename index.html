@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comparação de Pilotos de F1</title>
+    <link rel="stylesheet" href="estilos.css" />
+    <script src="scripts.js" defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .card-comparacao {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .piloto {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 0 10px;
+            width: 200px;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>x1 Pilotos de Fórmula 1</h1>
+
+    <form>
+        <input type="search" id="piloto_nome1" placeholder="Digite o nome do primeiro piloto" />
+        <input type="search" id="piloto_nome2" placeholder="Digite o nome do segundo piloto" />
+        <button type="button" id="comparar-pilotos">Comparar</button>
+        <button type="button" id="limpar-tudo">Limpar Todos</button>
+
+        <div id="spinner" style="display:none;">Carregando...</div>
+    </form>
+
+    <div id="container"></div>
+</body>
+</html>
