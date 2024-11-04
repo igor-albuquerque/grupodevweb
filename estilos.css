@@ -35,7 +35,14 @@ body {
     transform: scale(1.05);
   }
   
-
+  @keyframes moveCar {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
   
   #spinner {
     font-weight: bold;
