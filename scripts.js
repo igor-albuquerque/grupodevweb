@@ -222,3 +222,10 @@ function criaCardComparacao(dados1, dados2) {
     container.appendChild(cardPiloto1);
     container.appendChild(cardPiloto2);
 }
+function executarAcao() {
+}
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Enter" || event.code === "NumpadEnter") {
+        document.getElementById("comparar-pilotos").click();
+    }
+});
