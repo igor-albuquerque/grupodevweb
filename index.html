@@ -1,34 +1,104 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Comparação de Pilotos de F1</title>
+    <title>x1 Pilotos de Fórmula 1</title>
     <link rel="stylesheet" href="estilos.css" />
     <script src="scripts.js" defer></script>
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #5baddfd6;
             text-align: center;
+            padding: 20px;
+            animation: fadeIn 0.5s ease-in;
         }
 
-        .card-comparacao {
+        h1 {
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        #container {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
-            margin-top: 20px;
+            max-width: 100%;
+            gap: 20px;
         }
 
-        .piloto {
-            border: 1px solid #ccc;
+        div.card {
+            border: 2px solid #7b5ff9fd;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px;
+            text-align: center;
+            background-color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 250px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+        }
+
+        div.card.show {
+            opacity: 1;
+        }
+
+        div.card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        button {
+            background-color: #7b5ff9fd;
+            color: white;
+            border: none;
             border-radius: 5px;
-            padding: 10px;
-            margin: 0 10px;
-            width: 200px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
         }
 
-        img {
-            width: 100%;
-            height: auto;
+        button:hover {
+            background-color: #5a4dc9;
+            transform: scale(1.05);
+        }
+
+        #loading-message {
+            font-weight: bold;
+            color: #050714;
+            display: none;
+        }
+
+        .spinner {
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-top: 5px solid #7b5ff9fd;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: auto;
+            display: none;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
@@ -41,9 +111,166 @@
         <button type="button" id="comparar-pilotos">Comparar</button>
         <button type="button" id="limpar-tudo">Limpar Todos</button>
 
-        <div id="spinner" style="display:none;">Carregando...</div>
+        <div id="loading-message">Carregando...</div>
+        <div class="spinner"></div>
     </form>
 
     <div id="container"></div>
+
+    <script>
+        function criaCardComparacao(dados1, dados2) {
+            const container = document.getElementById("container");
+            container.innerHTML = "";
+
+            const card = document.createElement("div");
+            card.classList.add("card-comparacao");
+
+            const piloto1 = document.createElement("div");
+            piloto1.classList.add("card");
+
+            const foto1 = document.createElement("img");
+            foto1.src = dados1.imageSrc;
+            piloto1.appendChild(foto1);
+
+            const nome1 = document.createElement("p");
+            nome1.textContent = `Nome: ${dados1.nome}`;
+            piloto1.appendChild(nome1);
+
+            const vitorias1 = document.createElement("p");
+            vitorias1.textContent = `Vitórias: ${dados1.vitorias}`;
+            piloto1.appendChild(vitorias1);
+
+            const corridas1 = document.createElement("p");
+            corridas1.textContent = `Campeonatos: ${dados1.corridas}`;
+            piloto1.appendChild(corridas1);
+
+            const id1 = document.createElement("p");
+            id1.textContent = `ID: ${dados1.id}`;
+            piloto1.appendChild(id1);
+
+            const carreira1 = document.createElement("p");
+            carreira1.textContent = `Pontos de carreira: ${dados1.carreira}`;
+            piloto1.appendChild(carreira1);
+
+            const btnLimpar1 = document.createElement("button");
+            btnLimpar1.textContent = "Limpar";
+            btnLimpar1.onclick = () => {
+                piloto1.innerHTML = "";
+                piloto1.appendChild(btnLimpar1);
+            };
+            piloto1.appendChild(btnLimpar1);
+
+            card.appendChild(piloto1);
+
+            const piloto2 = document.createElement("div");
+            piloto2.classList.add("card");
+
+            const foto2 = document.createElement("img");
+            foto2.src = dados2.imageSrc;
+            piloto2.appendChild(foto2);
+
+            const nome2 = document.createElement("p");
+            nome2.textContent = `Nome: ${dados2.nome}`;
+            piloto2.appendChild(nome2);
+
+            const vitorias2 = document.createElement("p");
+            vitorias2.textContent = `Vitórias: ${dados2.vitorias}`;
+            piloto2.appendChild(vitorias2);
+
+            const corridas2 = document.createElement("p");
+            corridas2.textContent = `Campeonatos: ${dados2.corridas}`;
+            piloto2.appendChild(corridas2);
+
+            const id2 = document.createElement("p");
+            id2.textContent = `ID: ${dados2.id}`;
+            piloto2.appendChild(id2);
+
+            const carreira2 = document.createElement("p");
+            carreira2.textContent = `Pontos de carreira: ${dados2.carreira}`;
+            piloto2.appendChild(carreira2);
+
+            const btnLimpar2 = document.createElement("button");
+            btnLimpar2.textContent = "Limpar";
+            btnLimpar2.onclick = () => {
+                piloto2.innerHTML = "";
+                piloto2.appendChild(btnLimpar2);
+            };
+            piloto2.appendChild(btnLimpar2);
+
+            card.appendChild(piloto2);
+            container.appendChild(card);
+
+            setTimeout(() => {
+                piloto1.classList.add('show');
+                piloto2.classList.add('show');
+            }, 50);
+        }
+
+        async function buscarPiloto(nome) {
+            const url = `https://api-formula-1.p.rapidapi.com/drivers?search=${nome}`;
+            const options = {
+                method: 'GET',
+                headers: {
+                    'x-rapidapi-key': 'c7f52b762dmshdde23277bc1db4bp15da64jsnd2e933964b80',
+                    'x-rapidapi-host': 'api-formula-1.p.rapidapi.com'
+                }
+            };
+
+            try {
+                const resposta = await fetch(url, options);
+                if (resposta.status === 404 || resposta.status !== 200) {
+                    throw new Error("Piloto não encontrado ou erro desconhecido.");
+                }
+
+                const dados = await resposta.json();
+                return {
+                    imageSrc: dados.response[0]?.image,
+                    nome: dados.response[0]?.name,
+                    id: dados.response[0]?.id,
+                    vitorias: dados.response[0]?.podiums || 0,
+                    corridas: dados.response[0]?.world_championships || 0,
+                    carreira: dados.response[0]?.career_points || 0
+                };
+            } catch (error) {
+                console.error("Erro ao buscar piloto:", error);
+                return null;
+            }
+        }
+
+        async function compararPilotos() {
+            const nomePiloto1 = document.getElementById("piloto_nome1").value.toLowerCase();
+            const nomePiloto2 = document.getElementById("piloto_nome2").value.toLowerCase();
+
+            if (!nomePiloto1 || !nomePiloto2) {
+                alert("Insira o nome de dois pilotos para comparar.");
+                return;
+            }
+
+            const loadingMessage = document.getElementById("loading-message");
+            const spinner = document.querySelector(".spinner");
+
+            loadingMessage.style.display = "block";
+            spinner.style.display = "block";
+
+            const dadosPiloto1 = await buscarPiloto(nomePiloto1);
+            const dadosPiloto2 = await buscarPiloto(nomePiloto2);
+
+            loadingMessage.style.display = "none";
+            spinner.style.display = "none";
+
+            if (dadosPiloto1 && dadosPiloto2) {
+                criaCardComparacao(dadosPiloto1, dadosPiloto2);
+            } else {
+                alert("Um ou ambos os pilotos não foram encontrados.");
+            }
+        }
+
+        document.getElementById("comparar-pilotos").addEventListener("click", compararPilotos);
+        document.getElementById("limpar-tudo").addEventListener("click", () => {
+            document.getElementById("container").innerHTML = "";
+            document.getElementById("piloto_nome1").value = "";
+            document.getElementById("piloto_nome2").value = "";
+        });
+    </script>
 </body>
 </html>
