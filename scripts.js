@@ -137,6 +137,14 @@ async function compararPilotos() {
     const spinner = document.getElementById("spinner");
     spinner.style.display = "block";
 
+    const img_carro = document.createElement("img");
+    img_carro.src = "assets/f1_car.png";
+    img_carro.style.width = "50px";
+    img_carro.style.position = "relative";
+    img_carro.style.animation =  "moveCar 2s linear infinite";
+    
+    spinner.appendChild(img_carro);
+
     const dadosPiloto1 = await buscarPiloto(nomePiloto1);
     const dadosPiloto2 = await buscarPiloto(nomePiloto2);
 
