@@ -1,7 +1,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f8ff;
+    background-color: #fdcfcf;
     text-align: center;
     padding: 20px;
   }
@@ -14,11 +14,13 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    max-width: 100%;
+    gap:20px;
   }
-  
+
   
   div.card {
-    border: 2px solid #4682b4;
+    border: 2px solid #ff0000;
     border-radius: 10px;
     padding: 15px;
     margin: 10px;
@@ -33,7 +35,14 @@ body {
     transform: scale(1.05);
   }
   
-
+  @keyframes moveCar {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
   
   #spinner {
     font-weight: bold;

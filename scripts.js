@@ -32,6 +32,10 @@ function criaCardComparacao(dados1, dados2) {
     carreira1.textContent = `pontos de carreira: ${dados1.carreira}`;
     piloto1.appendChild(carreira1);
 
+    const idade1 = document.createElement("p"); 
+    idade1.textContent = `Idade: ${dados1.idade}`; 
+    piloto1.appendChild(idade1);
+
     const btnLimpar1 = document.createElement("button");
     btnLimpar1.textContent = "Limpar";
     btnLimpar1.onclick = () => {
@@ -69,6 +73,11 @@ function criaCardComparacao(dados1, dados2) {
     carreira2.textContent = `pontos de carreira: ${dados2.carreira}`;
     piloto2.appendChild(carreira2);
 
+
+    const idade2 = document.createElement("p"); 
+    idade2.textContent = `Idade: ${dados2.idade}`;
+    piloto2.appendChild(idade2);
+
     const btnLimpar2 = document.createElement("button");
     btnLimpar2.textContent = "Limpar";
     btnLimpar2.onclick = () => {
@@ -98,6 +107,8 @@ async function buscarPiloto(nome) {
         }
 
         const dados = await resposta.json();
+        const dataNascimento = new Date(dados.response[0]?.birthdate);
+        const idade = new Date().getFullYear() - dataNascimento.getFullYear()
         console.log(dados)
         return {
             imageSrc: dados.response[0]?.image,
@@ -105,7 +116,8 @@ async function buscarPiloto(nome) {
             id: dados.response[0]?.id,
             vitorias: dados.response[0]?.podiums || 0,
             corridas: dados.response[0]?.world_championships || 0,
-            carreira: dados.response[0]?.career_points || 0
+            carreira: dados.response[0]?.career_points || 0,
+            idade: idade
         };
     } catch (error) {
         console.error("Erro ao buscar piloto:", error);
@@ -124,6 +136,14 @@ async function compararPilotos() {
 
     const spinner = document.getElementById("spinner");
     spinner.style.display = "block";
+
+    const img_carro = document.createElement("img");
+    img_carro.src = "assets/f1_car.png";
+    img_carro.style.width = "50px";
+    img_carro.style.position = "relative";
+    img_carro.style.animation =  "moveCar 2s linear infinite";
+    
+    spinner.appendChild(img_carro);
 
     const dadosPiloto1 = await buscarPiloto(nomePiloto1);
     const dadosPiloto2 = await buscarPiloto(nomePiloto2);
@@ -176,6 +196,13 @@ function criaCardComparacao(dados1, dados2) {
 
         const carreira = document.createElement("p");
         carreira.textContent = `Pontos de carreira: ${dados.carreira}`;
+
+
+        const idade = document.createElement("p");
+        idade.textContent = `Idade: ${dados.idade}`; 
+        card.appendChild(idade);
+
+        
         card.appendChild(carreira);
 
         const btnLimpar = document.createElement("button");
