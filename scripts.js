@@ -55,7 +55,7 @@ function criaCardComparacao(dados1, dados2) {
     if (vencedor) {
                         
         const cardVencedor = document.createElement("div");
-        cardVencedor.classList.add("card", "card-vencedor");
+        cardVencedor.classList.add("card", "vencedor");
                     
         const fotoVencedor = document.createElement("img");
         fotoVencedor.src = vencedor.imageSrc;
@@ -72,7 +72,7 @@ function criaCardComparacao(dados1, dados2) {
         container.appendChild(cardVencedor);
         } else {
         const empate = document.createElement("div");
-        empate.classList.add("card", "card-empate"); 
+        empate.classList.add("card", "empate"); 
         empate.textContent = "Empate! Ambos os pilotos têm o mesmo número de vitórias.";
         container.appendChild(empate);
             }
