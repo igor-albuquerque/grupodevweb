@@ -2,92 +2,80 @@ function criaCardComparacao(dados1, dados2) {
     const container = document.getElementById("container");
     container.innerHTML = "";
 
-    const card = document.createElement("div");
-    card.classList.add("card");
+    function criarCardPiloto(dados) {
+        const card = document.createElement("div");
+        card.classList.add("card");
 
-    const piloto1 = document.createElement("div");
-    piloto1.classList.add("piloto");
+        const foto = document.createElement("img");
+        foto.src = dados.imageSrc;
+        card.appendChild(foto);
 
-    const foto1 = document.createElement("img");
-    foto1.src = dados1.imageSrc;
-    piloto1.appendChild(foto1);
+        const nome = document.createElement("p");
+        nome.textContent = `Nome: ${dados.nome}`;
+        card.appendChild(nome);
 
-    const nome1 = document.createElement("p");
-    nome1.textContent = `Nome: ${dados1.nome}`;
-    piloto1.appendChild(nome1);
+        const vitorias = document.createElement("p");
+        vitorias.textContent = `Vitórias: ${dados.vitorias}`;
+        card.appendChild(vitorias);
 
-    const vitorias1 = document.createElement("p");
-    vitorias1.textContent = `Vitórias: ${dados1.vitorias}`;
-    piloto1.appendChild(vitorias1);
+        const corridas = document.createElement("p");
+        corridas.textContent = `Campeonatos: ${dados.corridas}`;
+        card.appendChild(corridas);
 
-    const corridas1 = document.createElement("p");
-    corridas1.textContent = `campeonatos: ${dados1.corridas}`;
-    piloto1.appendChild(corridas1);
+        const id = document.createElement("p");
+        id.textContent = `ID: ${dados.id}`;
+        card.appendChild(id);
 
-    const id1 = document.createElement("p");
-    id1.textContent = `ID: ${dados1.id}`;
-    piloto1.appendChild(id1);
+        const carreira = document.createElement("p");
+        carreira.textContent = `Pontos de carreira: ${dados.carreira}`;
+        card.appendChild(carreira);
 
-    const carreira1 = document.createElement("p");
-    carreira1.textContent = `pontos de carreira: ${dados1.carreira}`;
-    piloto1.appendChild(carreira1);
+        const idade = document.createElement("p"); 
+        idade.textContent = `Idade: ${dados.idade}`; 
+        card.appendChild(idade);
 
-    const idade1 = document.createElement("p"); 
-    idade1.textContent = `Idade: ${dados1.idade}`; 
-    piloto1.appendChild(idade1);
+        const btnLimpar = document.createElement("button");
+        btnLimpar.textContent = "Limpar";
+        btnLimpar.onclick = () => {
+            card.innerHTML = ""; 
+        };
 
-    const btnLimpar1 = document.createElement("button");
-    btnLimpar1.textContent = "Limpar";
-    btnLimpar1.onclick = () => {
-        piloto1.innerHTML = "";
-        piloto1.appendChild(btnLimpar1);
-    };
-    piloto1.appendChild(btnLimpar1);
+        return card;
+    }
 
-    card.appendChild(piloto1);
+    const cardPiloto1 = criarCardPiloto(dados1);
+    const cardPiloto2 = criarCardPiloto(dados2);
 
-    const piloto2 = document.createElement("div");
-    piloto2.classList.add("piloto");
+    container.appendChild(cardPiloto1);
+    container.appendChild(cardPiloto2);
 
-    const foto2 = document.createElement("img");
-    foto2.src = dados2.imageSrc;
-    piloto2.appendChild(foto2);
+    const vencedor = (dados1.vitorias > dados2.vitorias) ? dados1 :
+                     (dados2.vitorias > dados1.vitorias) ? dados2 : null;
 
-    const nome2 = document.createElement("p");
-    nome2.textContent = `Nome: ${dados2.nome}`;
-    piloto2.appendChild(nome2);
-
-    const vitorias2 = document.createElement("p");
-    vitorias2.textContent = `Vitórias: ${dados2.vitorias}`;
-    piloto2.appendChild(vitorias2);
-
-    const corridas2 = document.createElement("p");
-    corridas2.textContent = `campeonatos: ${dados2.corridas}`;
-    piloto2.appendChild(corridas2);
-
-    const id2 = document.createElement("p");
-    id2.textContent = `ID: ${dados2.id}`;
-    piloto2.appendChild(id2);
-
-    const carreira2 = document.createElement("p");
-    carreira2.textContent = `pontos de carreira: ${dados2.carreira}`;
-    piloto2.appendChild(carreira2);
-
-
-    const idade2 = document.createElement("p"); 
-    idade2.textContent = `Idade: ${dados2.idade}`;
-    piloto2.appendChild(idade2);
-
-    const btnLimpar2 = document.createElement("button");
-    btnLimpar2.textContent = "Limpar";
-    btnLimpar2.onclick = () => {
-        piloto2.innerHTML = "";
-        piloto2.appendChild(btnLimpar2);
-    };
-    piloto2.appendChild(btnLimpar2);
-
-    card.appendChild(piloto2);
-    container.appendChild(card);
+    if (vencedor) {
+                        
+        const cardVencedor = document.createElement("div");
+        cardVencedor.classList.add("card", "card-vencedor");
+                    
+        const fotoVencedor = document.createElement("img");
+        fotoVencedor.src = vencedor.imageSrc;
+        cardVencedor.appendChild(fotoVencedor);
+                    
+        const nomeVencedor = document.createElement("p");
+        nomeVencedor.textContent = `Vencedor: ${vencedor.nome}`;
+        cardVencedor.appendChild(nomeVencedor);
+                    
+        const fraseVencedor = document.createElement("p");
+        fraseVencedor.textContent = `Parabéns! ${vencedor.nome} venceu com ${vencedor.vitorias} vitórias.`;
+        cardVencedor.appendChild(fraseVencedor);
+                    
+        container.appendChild(cardVencedor);
+        } else {
+        const empate = document.createElement("div");
+        empate.classList.add("card", "card-empate"); 
+        empate.textContent = "Empate! Ambos os pilotos têm o mesmo número de vitórias.";
+        container.appendChild(empate);
+            }
 }
 
 async function buscarPiloto(nome) {
@@ -108,8 +96,7 @@ async function buscarPiloto(nome) {
 
         const dados = await resposta.json();
         const dataNascimento = new Date(dados.response[0]?.birthdate);
-        const idade = new Date().getFullYear() - dataNascimento.getFullYear()
-        console.log(dados)
+        const idade = new Date().getFullYear() - dataNascimento.getFullYear();
         return {
             imageSrc: dados.response[0]?.image,
             nome: dados.response[0]?.name,
@@ -137,12 +124,14 @@ async function compararPilotos() {
     const spinner = document.getElementById("spinner");
     spinner.style.display = "block";
 
+    spinner.innerHTML = "Carregando..."; 
     const img_carro = document.createElement("img");
-    img_carro.src = "assets/f1_car.png";
-    img_carro.style.width = "50px";
-    img_carro.style.position = "relative";
-    img_carro.style.animation =  "moveCar 2s linear infinite";
-    
+    img_carro.src = "assets/F1.png";
+    img_carro.id = "F1.png"; 
+    img_carro.style.width = "25px";
+    img_carro.style.position = "absolute"; 
+    img_carro.style.animation = "moveCar 2s linear forwards"; 
+
     spinner.appendChild(img_carro);
 
     const dadosPiloto1 = await buscarPiloto(nomePiloto1);
@@ -164,66 +153,6 @@ document.getElementById("limpar-tudo").addEventListener("click", () => {
     document.getElementById("piloto_nome2").value = "";
 });
 
-
-
-function criaCardComparacao(dados1, dados2) {
-    const container = document.getElementById("container");
-    container.innerHTML = "";
-
-    function criarCardPiloto(dados) {
-        const card = document.createElement("div");
-        card.classList.add("card");
-
-        const foto = document.createElement("img");
-        foto.src = dados.imageSrc;
-        card.appendChild(foto);
-
-        const nome = document.createElement("p");
-        nome.textContent = `Nome: ${dados.nome}`;
-        card.appendChild(nome);
-
-        const vitorias = document.createElement("p");
-        vitorias.textContent = `Vitórias: ${dados.vitorias}`;
-        card.appendChild(vitorias);
-
-        const corridas = document.createElement("p");
-        corridas.textContent = `Campeonatos: ${dados.corridas}`;
-        card.appendChild(corridas);
-
-        const id = document.createElement("p");
-        id.textContent = `ID: ${dados.id}`;
-        card.appendChild(id);
-
-        const carreira = document.createElement("p");
-        carreira.textContent = `Pontos de carreira: ${dados.carreira}`;
-
-
-        const idade = document.createElement("p");
-        idade.textContent = `Idade: ${dados.idade}`; 
-        card.appendChild(idade);
-
-        
-        card.appendChild(carreira);
-
-        const btnLimpar = document.createElement("button");
-        btnLimpar.textContent = "Limpar";
-        btnLimpar.onclick = () => {
-            card.innerHTML = ""; 
-            card.appendChild(btnLimpar);
-        };
-        card.appendChild(btnLimpar);
-
-        return card;
-    }
-
-    const cardPiloto1 = criarCardPiloto(dados1);
-    const cardPiloto2 = criarCardPiloto(dados2);
-
-    container.appendChild(cardPiloto1);
-    container.appendChild(cardPiloto2);
-}
-function executarAcao() {
-}
 document.addEventListener("keydown", function(event) {
     if (event.key === "Enter" || event.code === "NumpadEnter") {
         document.getElementById("comparar-pilotos").click();
