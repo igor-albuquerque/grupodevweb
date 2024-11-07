@@ -7,10 +7,12 @@ function criaCardComparacao(dados1, dados2) {
         card.classList.add("card");
 
 
+        const fotoDiv = document.createElement('div');
+        imageDiv.classList.add('card-image');
         const foto = document.createElement("img");
         foto.src = dados.imageSrc;
         card.appendChild(foto);
-         
+
         const nome = document.createElement("p");
         nome.textContent = `${dados.nome}`;
         card.appendChild(nome);
@@ -48,9 +50,8 @@ function criaCardComparacao(dados1, dados2) {
     container.appendChild(cardPiloto2);
     
     const vencedor = (dados1.vitorias > dados2.vitorias) ? dados1 :
-                    (dados2.vitorias > dados1.vitorias) ? dados2 : null;
-    
-    
+                     (dados2.vitorias > dados1.vitorias) ? dados2 : null;
+
     if (vencedor) {
         
         const cardVencedor = document.createElement("div");
@@ -75,7 +76,7 @@ function criaCardComparacao(dados1, dados2) {
         empate.textContent = "Empate! Ambos os pilotos têm o mesmo número de vitórias.";
         container.appendChild(empate);
             }
-        }
+}
 
 
 async function buscarPiloto(nome) {
@@ -123,8 +124,8 @@ async function compararPilotos() {
 
     const spinner = document.getElementById("spinner");
     spinner.style.display = "block";
-    
-    spinner.innerHTML = "Carregando...";
+
+    spinner.innerHTML = "Carregando..."; 
     const img_carro = document.createElement("img");
     img_carro.src = "assets/F1.png";
     img_carro.id = "F1.png";
