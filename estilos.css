@@ -120,16 +120,9 @@ div.card p {
   animation: pontos 1s steps(3, end) infinite;
 }
 
-.card {
-  background-color: green; 
-  color: #ffffff; 
-  border: 2px solid #0de209;
-  padding: 10px;
-  border-radius: 10px;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.vencedor {
+  border: 2px solid red;
 }
-
 .empate {
   background-color: #f0f0f0;
   color: #333;

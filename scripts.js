@@ -6,13 +6,11 @@ function criaCardComparacao(dados1, dados2) {
         const card = document.createElement("div");
         card.classList.add("card");
 
-        const fotoDiv = document.createElement('div');
-        imageDiv.classList.add('card-image');
+
         const foto = document.createElement("img");
         foto.src = dados.imageSrc;
-        fotoDiv.appendChild(foto);
-        card.appendChild(imageDiv);
-        
+        card.appendChild(foto);
+         
         const nome = document.createElement("p");
         nome.textContent = `${dados.nome}`;
         card.appendChild(nome);
@@ -50,18 +48,18 @@ function criaCardComparacao(dados1, dados2) {
     container.appendChild(cardPiloto2);
     
     const vencedor = (dados1.vitorias > dados2.vitorias) ? dados1 :
-    (dados2.vitorias > dados1.vitorias) ? dados2 : null;
+                    (dados2.vitorias > dados1.vitorias) ? dados2 : null;
     
-
+    
     if (vencedor) {
-                        
+        
         const cardVencedor = document.createElement("div");
         cardVencedor.classList.add("card", "vencedor");
-                    
+        
         const fotoVencedor = document.createElement("img");
         fotoVencedor.src = vencedor.imageSrc;
         cardVencedor.appendChild(fotoVencedor);
-                    
+        
         const nomeVencedor = document.createElement("p");
         nomeVencedor.textContent = `Vencedor: ${vencedor.nome}`;
         cardVencedor.appendChild(nomeVencedor);
@@ -71,13 +69,13 @@ function criaCardComparacao(dados1, dados2) {
         cardVencedor.appendChild(fraseVencedor);
                     
         container.appendChild(cardVencedor);
-        } else {
+    } else {
         const empate = document.createElement("div");
         empate.classList.add("card", "empate"); 
         empate.textContent = "Empate! Ambos os pilotos têm o mesmo número de vitórias.";
         container.appendChild(empate);
             }
-}
+        }
 
 
 async function buscarPiloto(nome) {
@@ -85,7 +83,7 @@ async function buscarPiloto(nome) {
     const options = {
         method: 'GET',
         headers: {
-            'x-rapidapi-key': 'c7f52b762dmshdde23277bc1db4bp15da64jsnd2e933964b80',
+            'x-rapidapi-key': '9bd4480d30msh303ccd63e416d40p156124jsn0edbfc0c9806',
             'x-rapidapi-host': 'api-formula-1.p.rapidapi.com'
         }
     };
@@ -125,7 +123,7 @@ async function compararPilotos() {
 
     const spinner = document.getElementById("spinner");
     spinner.style.display = "block";
-
+    
     spinner.innerHTML = "Carregando...";
     const img_carro = document.createElement("img");
     img_carro.src = "assets/F1.png";
