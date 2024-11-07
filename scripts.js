@@ -7,8 +7,6 @@ function criaCardComparacao(dados1, dados2) {
         card.classList.add("card");
 
 
-        const fotoDiv = document.createElement('div');
-        imageDiv.classList.add('card-image');
         const foto = document.createElement("img");
         foto.src = dados.imageSrc;
         card.appendChild(foto);
