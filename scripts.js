@@ -6,51 +6,52 @@ function criaCardComparacao(dados1, dados2) {
         const card = document.createElement("div");
         card.classList.add("card");
 
+        const fotoDiv = document.createElement('div');
+        imageDiv.classList.add('card-image');
         const foto = document.createElement("img");
         foto.src = dados.imageSrc;
-        card.appendChild(foto);
-
+        fotoDiv.appendChild(foto);
+        card.appendChild(imageDiv);
+        
         const nome = document.createElement("p");
-        nome.textContent = `Nome: ${dados.nome}`;
+        nome.textContent = `${dados.nome}`;
         card.appendChild(nome);
-
+        
         const vitorias = document.createElement("p");
         vitorias.textContent = `Vitórias: ${dados.vitorias}`;
         card.appendChild(vitorias);
-
+        
         const corridas = document.createElement("p");
         corridas.textContent = `Campeonatos: ${dados.corridas}`;
         card.appendChild(corridas);
-
-        const id = document.createElement("p");
-        id.textContent = `ID: ${dados.id}`;
-        card.appendChild(id);
-
+        
         const carreira = document.createElement("p");
         carreira.textContent = `Pontos de carreira: ${dados.carreira}`;
         card.appendChild(carreira);
-
-        const idade = document.createElement("p"); 
-        idade.textContent = `Idade: ${dados.idade}`; 
+        
+        const idade = document.createElement("p");
+        idade.textContent = `Idade: ${dados.idade}`;
         card.appendChild(idade);
-
+        
+        
         const btnLimpar = document.createElement("button");
         btnLimpar.textContent = "Limpar";
         btnLimpar.onclick = () => {
-            card.innerHTML = ""; 
+            card.innerHTML = "";
         };
-
+        
         return card;
     }
-
+    
     const cardPiloto1 = criarCardPiloto(dados1);
     const cardPiloto2 = criarCardPiloto(dados2);
-
+    
     container.appendChild(cardPiloto1);
     container.appendChild(cardPiloto2);
-
+    
     const vencedor = (dados1.vitorias > dados2.vitorias) ? dados1 :
-                     (dados2.vitorias > dados1.vitorias) ? dados2 : null;
+    (dados2.vitorias > dados1.vitorias) ? dados2 : null;
+    
 
     if (vencedor) {
                         
@@ -77,6 +78,7 @@ function criaCardComparacao(dados1, dados2) {
         container.appendChild(empate);
             }
 }
+
 
 async function buscarPiloto(nome) {
     const url = `https://api-formula-1.p.rapidapi.com/drivers?search=${nome}`;
@@ -124,13 +126,13 @@ async function compararPilotos() {
     const spinner = document.getElementById("spinner");
     spinner.style.display = "block";
 
-    spinner.innerHTML = "Carregando..."; 
+    spinner.innerHTML = "Carregando...";
     const img_carro = document.createElement("img");
     img_carro.src = "assets/F1.png";
-    img_carro.id = "F1.png"; 
+    img_carro.id = "F1.png";
     img_carro.style.width = "25px";
-    img_carro.style.position = "absolute"; 
-    img_carro.style.animation = "moveCar 2s linear forwards"; 
+    img_carro.style.position = "absolute";
+    img_carro.style.animation = "moveCar 2s linear forwards";
 
     spinner.appendChild(img_carro);
 
@@ -153,7 +155,7 @@ document.getElementById("limpar-tudo").addEventListener("click", () => {
     document.getElementById("piloto_nome2").value = "";
 });
 
-document.addEventListener("keydown", function(event) {
+document.addEventListener("keydown", function (event) {
     if (event.key === "Enter" || event.code === "NumpadEnter") {
         document.getElementById("comparar-pilotos").click();
     }

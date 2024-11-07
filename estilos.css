@@ -45,26 +45,40 @@ button {
 }
 
 button:hover {
-  background-color: #ffffff;
+  background-color: red;
   transform: scale(1.05);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 div.card {
   background-color: #6185d3;
-  border-radius: 10px;
   padding: 15px;
   margin: 10px;
-  text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   width: 250px;
+  height: 500px;
   transition: transform 0.2s;
   color: rgb(255, 255, 255);
   margin-bottom: 30px;
+  overflow: hidden;
 }
 
-div.card:hover {
-  transform: scale(1.05);
+
+div.card img {
+  object-fit: cover;
+  margin-top: 12%;
+  transform: scale(1.5);
+  overflow: auto;
+}
+
+div.card img:hover {
+  transform: scale(1.7);
+}
+
+div.card p {
+  transform: translateY(100px);
+  height: 25px;
+  color: white;
 }
 
 
@@ -106,8 +120,8 @@ div.card:hover {
   animation: pontos 1s steps(3, end) infinite;
 }
 
-.vencedor {
-  background-color: #1660ff; 
+.card {
+  background-color: green; 
   color: #ffffff; 
   border: 2px solid #0de209;
   padding: 10px;
