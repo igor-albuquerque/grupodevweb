@@ -156,4 +156,7 @@ document.addEventListener("keydown", function (event) {
     if (event.key === "Enter" || event.code === "NumpadEnter") {
         document.getElementById("comparar-pilotos").click();
     }
+    if (event.key === "Delete" || event.code === "NumpadDelete") {
+        document.getElementById("limpar-tudo").click();
+    }
 });
