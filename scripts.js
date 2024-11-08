@@ -6,7 +6,6 @@ function criaCardComparacao(dados1, dados2) {
         const card = document.createElement("div");
         card.classList.add("card");
 
-
         const foto = document.createElement("img");
         foto.src = dados.imageSrc;
         card.appendChild(foto);
@@ -32,12 +31,15 @@ function criaCardComparacao(dados1, dados2) {
         card.appendChild(idade);
         
         
+        
+
+        
         const btnLimpar = document.createElement("button");
         btnLimpar.textContent = "Limpar";
         btnLimpar.onclick = () => {
             card.innerHTML = "";
         };
-        
+
         return card;
     }
     
@@ -49,9 +51,8 @@ function criaCardComparacao(dados1, dados2) {
     
     const vencedor = (dados1.vitorias > dados2.vitorias) ? dados1 :
                      (dados2.vitorias > dados1.vitorias) ? dados2 : null;
-
+    
     if (vencedor) {
-        
         const cardVencedor = document.createElement("div");
         cardVencedor.classList.add("card", "vencedor");
         
@@ -62,20 +63,36 @@ function criaCardComparacao(dados1, dados2) {
         const nomeVencedor = document.createElement("p");
         nomeVencedor.textContent = `Vencedor: ${vencedor.nome}`;
         cardVencedor.appendChild(nomeVencedor);
-                    
+
         const fraseVencedor = document.createElement("p");
         fraseVencedor.textContent = `Parabéns! ${vencedor.nome} venceu com ${vencedor.vitorias} vitórias.`;
         cardVencedor.appendChild(fraseVencedor);
-                    
+
         container.appendChild(cardVencedor);
+
+        function criarConfete() {
+            const confete = document.createElement("div");
+            confete.classList.add("confetti");
+            confete.style.left = `${Math.random() * 150}%`;
+            confete.style.top = `${cardVencedor.offsetTop + cardVencedor.offsetHeight}px`;
+            confete.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            document.body.appendChild(confete);
+
+            setTimeout(() => {
+                confete.remove();
+            }, 4000);
+        }
+
+        for (let i = 0; i < 50; i++) {
+            criarConfete();
+        }
     } else {
         const empate = document.createElement("div");
         empate.classList.add("card", "empate"); 
         empate.textContent = "Empate! Ambos os pilotos têm o mesmo número de vitórias.";
         container.appendChild(empate);
-            }
+    }
 }
-
 
 async function buscarPiloto(nome) {
     const url = `https://api-formula-1.p.rapidapi.com/drivers?search=${nome}`;
@@ -116,7 +133,9 @@ async function compararPilotos() {
     const nomePiloto2 = document.getElementById("piloto_nome2").value.toLowerCase();
 
     if (!nomePiloto1 || !nomePiloto2) {
+        const spinner = document.getElementById("spinner");
         alert("Insira o nome de dois pilotos para comparar.");
+        spinner.style.display = "none";
         return;
     }
 
@@ -129,7 +148,7 @@ async function compararPilotos() {
     img_carro.id = "F1.png";
     img_carro.style.width = "25px";
     img_carro.style.position = "absolute";
-    img_carro.style.animation = "moveCar 2s linear forwards";
+    img_carro.style.animation = "moveCar 3s ease-in-out forwards";
 
     spinner.appendChild(img_carro);
 
@@ -140,8 +159,8 @@ async function compararPilotos() {
         criaCardComparacao(dadosPiloto1, dadosPiloto2);
     } else {
         alert("Um ou ambos os pilotos não foram encontrados.");
+        spinner.style.display = "none";
     }
-
     spinner.style.display = "none";
 }
 
@@ -160,3 +179,27 @@ document.addEventListener("keydown", function (event) {
         document.getElementById("limpar-tudo").click();
     }
 });
+
+let intervalId = null;
+
+function executarAcao() {
+    if (intervalId !== null) return;
+
+    let spinner = document.getElementById('spinner');
+    spinner.style.display = 'block';
+
+    let loadingText = spinner;
+    let dots = 1;
+    intervalId = setInterval(function() {
+        if (dots === 1) {
+            loadingText.textContent = 'Carregando.';
+            dots++;
+        } else if (dots === 2) {
+            loadingText.textContent = 'Carregando..';
+            dots++;
+        } else if (dots === 3) {
+            loadingText.textContent = 'Carregando...';
+            dots = 1;
+        }
+    }, 500);
+}

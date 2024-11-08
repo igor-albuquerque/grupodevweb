@@ -1,21 +1,40 @@
 body {
   font-family: Arial, sans-serif;
   background-image: url("https://www.f1mania.net/wp-content/uploads/2020/10/XPB_1065421_HiRes.jpg");
-  background-size: cover;
+  background-size: 100% 100%;
   background-attachment: fixed;
   background-position: center;
   text-align: center;
   margin: 0;
   padding: 0;
+  animation: trocaImagem 80s infinite;
+}
+
+@keyframes trocaImagem {
+  0% {
+    background-image: url("https://www.f1mania.net/wp-content/uploads/2020/10/XPB_1065421_HiRes.jpg");
+  }
+  25% {
+    background-image: url("https://wallpaper4k.top/wp-content/uploads/2023/10/HD-Wallpapers-2011-Formula-1-Grand-Prix-of-Hungary-1024x576.jpg");
+  }
+  50% {
+    background-image: url("https://wallpapers.com/images/hd/f1-game-qdbcayx4itefc4oe.jpg");
+  }
+  100% {
+    background-image: url("https://www.f1mania.net/wp-content/uploads/2020/10/XPB_1065421_HiRes.jpg");
+  }
 }
 
 #header {
-  background-color: #6185d3;
+  background-image: url("https://img.freepik.com/vetores-premium/vista-superior-de-fundo-de-corrida-de-linha-de-partida-e-chegada-grunge-texturizado-na-estrada-de-asfalto-elemento-grafico-de-conceito-abstrato-ilustracao-em-vetor-eps10_182604-282.jpg?w=1060");
+  background-size: 100% 100%;
   max-width: 80%;
   margin: 40px auto;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1;
 }
 
 h1 {
@@ -45,27 +64,27 @@ button {
 }
 
 button:hover {
-  background-color: red;
+  background-color: #f54b59;
   transform: scale(1.05);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  color:#ffffff;
 }
 
 div.card {
-  background-color: #6185d3;
-  padding: 15px;
+  background-color: #f54b59;
+  padding: 20px 20px;
   margin: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   width: 200px;
-  height: 300px;
+  height: auto;
   transition: transform 0.2s;
   color: rgb(255, 255, 255);
   margin-bottom: 30px;
   overflow: hidden;
 }
 
-
 div.card img {
-  height: 120px;
+  height: auto;
   object-fit: cover;
   margin-top: 12%;
   transform: scale(1.2);
@@ -73,13 +92,21 @@ div.card img {
 }
 
 div.card:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 div.card p {
   transform: translateY(10px);
   height: -270px;
   color: white;
+}
+
+.card.vencedor {
+  transform: scale(1.2);
+}
+
+.card.vencedor:hover {
+  transform: scale(1.2);
 }
 
 
@@ -96,40 +123,53 @@ div.card p {
 
 #carro {
   position: relative;
-  animation: moveCar 2s linear infinite;
+  animation: moveCar 3s ease-in-out forwards;
   margin-left: 10px;
 }
 
 @keyframes moveCar {
-  from {
-      transform: translateX(0);
+  0% {
+    transform: translateX(0px);
   }
-  to {
-      transform: translateX(100%);
+  50% {
+    transform: translateX(200px);
+  }
+  100% {
+    transform: translateX(0px);
   }
 }
 
-#pontos {
-  display: inline-block;
-  font-size: 1.2em;
-  margin-left: 5px;
+.confetti {
+  position: absolute;
+  bottom: 0;
+  left: 100%;
+  width: 15px;
+  height: 15px;
+  background-color: #ff0;
+  opacity: 0;
+  animation: confetti 4s ease-in-out forwards;
+  pointer-events: none;
 }
 
 
-#pontos::after {
-  content: "";
-  animation: pontos 1s steps(3, end) infinite;
+@keyframes confetti {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+  30% {
+    transform: translateY(-50px) rotate(45deg);
+  }
+  60% {
+    transform: translateY(0) rotate(180deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100px) rotate(720deg);
+  }
 }
 
-.vencedor {
-  background-color: #1660ff; 
-  color: #ffffff; 
-  border: 2px solid #0de209;
-  padding: 10px;
-  border-radius: 10px;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
+
 .empate {
   background-color: #f0f0f0;
   color: #333;
