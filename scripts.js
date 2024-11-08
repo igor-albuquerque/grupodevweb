@@ -157,6 +157,9 @@ async function compararPilotos() {
 
     if (dadosPiloto1 && dadosPiloto2) {
         criaCardComparacao(dadosPiloto1, dadosPiloto2);
+        const historico = JSON.parse(localStorage.getItem('historico')) || [];
+        historico.push({ dadosPiloto1, dadosPiloto2, vencedor: dadosPiloto1.vitorias > dadosPiloto2.vitorias ? dadosPiloto1 : dadosPiloto2 });
+        localStorage.setItem('historico', JSON.stringify(historico));
     } else {
         alert("Um ou ambos os pilotos não foram encontrados.");
         spinner.style.display = "none";
