@@ -102,6 +102,7 @@ div.card p {
 }
 
 .card.vencedor {
+  background-color: #f54b59;
   transform: scale(1.2);
 }
 
@@ -158,10 +159,10 @@ div.card p {
     transform: translateY(0) rotate(0deg);
   }
   30% {
-    transform: translateY(-50px) rotate(45deg);
+    transform: translateY(-70px) rotate(45deg);
   }
   60% {
-    transform: translateY(0) rotate(180deg);
+    transform: translateY(60) rotate(180deg);
   }
   100% {
     opacity: 0;
@@ -171,11 +172,9 @@ div.card p {
 
 
 .empate {
-  background-color: #f0f0f0;
   color: #333;
   border: 2px solid #cccccc;
-  padding: 10px;
-  border-radius: 10px;
+  padding: 30px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }

@@ -1,0 +1,91 @@
+body {
+  font-family: Arial, sans-serif;
+  background-image: url("https://s1.1zoom.me/big0/132/Ferrari_Formula_1_F1-75_2022_Red_Side_Gray_610341_1280x853.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+#header {
+  background-image: url("https://img.freepik.com/vetores-premium/vista-superior-de-fundo-de-corrida-de-linha-de-partida-e-chegada-grunge-texturizado-na-estrada-de-asfalto-elemento-grafico-de-conceito-abstrato-ilustracao-em-vetor-eps10_182604-282.jpg?w=1060");
+  background-size: 100% 100%;
+  max-width: 80%;
+  margin: 40px auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1;
+}
+
+h1 {
+  color: #ffffff;
+}
+
+#container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 55px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+button {
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+  background-color: #f54b59;
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  color: #ffffff;
+}
+
+div.card {
+  background-color: #f54b59;
+  padding: 30px 30px;
+  margin:10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 200px;
+  height:auto;
+  transition: transform 0.2s;
+  color: white;
+  overflow: hidden;
+}
+
+div.card img {
+  height: auto;
+  width: cover;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+div.card:hover {
+  transform: scale(1.05);
+  
+}
+div.card.vencedor {
+  transform: scale(1.1);
+}
+.empate {
+  background-color: #f0f0f0;
+  color: #333;
+  border: 2px solid #cccccc;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
