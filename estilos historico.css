@@ -56,12 +56,12 @@ button:hover {
 }
 
 div.card {
-  background-color: #f54b59;
+  background-color: #181818;
   padding: 30px 30px;
-  margin:10px;
+  margin: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   width: 200px;
-  height:auto;
+  height: auto;
   transition: transform 0.2s;
   color: white;
   overflow: hidden;
@@ -76,15 +76,15 @@ div.card img {
 
 div.card:hover {
   transform: scale(1.05);
-  
 }
+
 div.card.vencedor {
   transform: scale(1.1);
 }
+
 .empate {
   background-color: #f0f0f0;
   color: #333;
-  border: 2px solid #cccccc;
   padding: 10px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);

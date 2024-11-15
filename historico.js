@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
     const historico = JSON.parse(localStorage.getItem('historico')) || [];
-
     exibirHistorico(historico);
 });
 
@@ -17,7 +16,7 @@ function exibirHistorico(historico) {
         return;
     }
 
-    historico.forEach(comparacao => {
+    historico.reverse().forEach(comparacao => { 
         criaCardComparacaohistorico(comparacao.dadosPiloto1, comparacao.dadosPiloto2);
     });
 
@@ -39,11 +38,11 @@ function criaCardComparacaohistorico(dados1, dados2) {
     if (vencedor) {
         const cardVencedor = document.createElement("div");
         cardVencedor.classList.add("card", "vencedor");
-        
+
         const fotoVencedor = document.createElement("img");
         fotoVencedor.src = vencedor.imageSrc;
         cardVencedor.appendChild(fotoVencedor);
-        
+
         const nomeVencedor = document.createElement("p");
         nomeVencedor.textContent = `Vencedor: ${vencedor.nome}`;
         cardVencedor.appendChild(nomeVencedor);
@@ -72,19 +71,19 @@ function criarCardPiloto(dados) {
     const nome = document.createElement("p");
     nome.textContent = `${dados.nome}`;
     card.appendChild(nome);
-    
+
     const vitorias = document.createElement("p");
     vitorias.textContent = `Vitórias: ${dados.vitorias}`;
     card.appendChild(vitorias);
-    
+
     const corridas = document.createElement("p");
     corridas.textContent = `Campeonatos: ${dados.corridas}`;
     card.appendChild(corridas);
-    
+
     const carreira = document.createElement("p");
     carreira.textContent = `Pontos de carreira: ${dados.carreira}`;
     card.appendChild(carreira);
-    
+
     const idade = document.createElement("p");
     idade.textContent = `Idade: ${dados.idade}`;
     card.appendChild(idade);
@@ -98,12 +97,11 @@ function limparHistorico() {
     alert("Histórico limpo com sucesso!"); 
 }
 
-
 function filtrarVencedor() {
     const filtroInput = document.getElementById("filtro-input").value.toLowerCase();
     const historico = JSON.parse(localStorage.getItem('historico')) || [];
 
-   const historicoFiltrado = historico.filter(comparacao => {
+    const historicoFiltrado = historico.filter(comparacao => {
         const vencedor = comparacao.vencedor;
         return vencedor && vencedor.nome.toLowerCase().includes(filtroInput);
     });
@@ -112,14 +110,37 @@ function filtrarVencedor() {
 }
 
 
+function filtrarVencedor() {
+    const filtroInput = document.getElementById("filtro-input").value.toLowerCase();
+    const historico = JSON.parse(localStorage.getItem('historico')) || [];
+
+    const historicoFiltrado = historico.filter(comparacao => {
+        const vencedor = (comparacao.dadosPiloto1.vitorias > comparacao.dadosPiloto2.vitorias) ? comparacao.dadosPiloto1 :
+                         (comparacao.dadosPiloto2.vitorias > comparacao.dadosPiloto1.vitorias) ? comparacao.dadosPiloto2 : null;
+        
+
+        if (filtroInput === "") {
+            return true;
+        }
+
+        if (filtroInput === "empate") {
+            return vencedor === null;
+        }
+
+    
+        return vencedor && vencedor.nome.toLowerCase().includes(filtroInput);
+    });
+
+    exibirHistorico(historicoFiltrado); 
+}
+
 document.getElementById("filtro-btn").addEventListener("click", filtrarVencedor);
 
 
 function ordenarPorVitorias() {
     const historico = JSON.parse(localStorage.getItem('historico')) || [];
 
-
-    historico.sort((a, b) => {
+    historico.sort((b, a) => {
         const vitoriasA = a.vencedor ? a.vencedor.vitorias : 0;
         const vitoriasB = b.vencedor ? b.vencedor.vitorias : 0;
         return vitoriasB - vitoriasA;
@@ -130,4 +151,3 @@ function ordenarPorVitorias() {
 
 
 document.getElementById("ordenar-vitorias-btn").addEventListener("click", ordenarPorVitorias);
-

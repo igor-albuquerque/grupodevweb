@@ -102,7 +102,6 @@ div.card p {
 }
 
 .card.vencedor {
-  background-color: #f54b59;
   transform: scale(1.2);
 }
 
@@ -173,7 +172,6 @@ div.card p {
 
 .empate {
   color: #333;
-  border: 2px solid #cccccc;
   padding: 30px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
