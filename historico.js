@@ -97,3 +97,37 @@ function limparHistorico() {
     document.getElementById("container").innerHTML = ""; 
     alert("Histórico limpo com sucesso!"); 
 }
+
+
+function filtrarVencedor() {
+    const filtroInput = document.getElementById("filtro-input").value.toLowerCase();
+    const historico = JSON.parse(localStorage.getItem('historico')) || [];
+
+   const historicoFiltrado = historico.filter(comparacao => {
+        const vencedor = comparacao.vencedor;
+        return vencedor && vencedor.nome.toLowerCase().includes(filtroInput);
+    });
+
+    exibirHistorico(historicoFiltrado); 
+}
+
+
+document.getElementById("filtro-btn").addEventListener("click", filtrarVencedor);
+
+
+function ordenarPorVitorias() {
+    const historico = JSON.parse(localStorage.getItem('historico')) || [];
+
+
+    historico.sort((a, b) => {
+        const vitoriasA = a.vencedor ? a.vencedor.vitorias : 0;
+        const vitoriasB = b.vencedor ? b.vencedor.vitorias : 0;
+        return vitoriasB - vitoriasA;
+    });
+
+    exibirHistorico(historico); 
+}
+
+
+document.getElementById("ordenar-vitorias-btn").addEventListener("click", ordenarPorVitorias);
+
