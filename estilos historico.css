@@ -65,6 +65,8 @@ div.card {
   transition: transform 0.2s;
   color: white;
   overflow: hidden;
+  position: relative; 
+  border-radius: 15px; 
 }
 
 div.card img {
@@ -80,6 +82,7 @@ div.card:hover {
 
 div.card.vencedor {
   transform: scale(1.1);
+  border: 2px solid #ec0101;  
 }
 
 .empate {
@@ -88,4 +91,14 @@ div.card.vencedor {
   padding: 10px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+div.card.vencedor::before {
+  content: '👑'; 
+  font-size: 2em; 
+  position: absolute;
+  top: -10px; 
+  left: 50%;
+  transform: translateX(-50%); 
+  color: gold; 
 }

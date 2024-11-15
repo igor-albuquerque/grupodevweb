@@ -71,16 +71,16 @@ button:hover {
 }
 
 div.card {
-  background-color: #f54b59;
-  padding: 20px 20px;
+  background-color: #e00909; 
+  border-radius: 15px; 
+  padding: 20px;
   margin: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  width: 200px;
-  height: auto;
-  transition: transform 0.2s;
-  color: rgb(255, 255, 255);
-  margin-bottom: 30px;
-  overflow: hidden;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); 
+  width: 220px; 
+  color: white;
+  position: relative; 
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
 div.card img {
@@ -103,10 +103,13 @@ div.card p {
 
 .card.vencedor {
   transform: scale(1.2);
+  border: 2px solid #ffffff;  
 }
 
 .card.vencedor:hover {
   transform: scale(1.2);
+  border: 2px solid #ffffff;
+  
 }
 
 
@@ -175,4 +178,15 @@ div.card p {
   padding: 30px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+div.card.vencedor::before {
+  content: '👑'; 
+  font-size: 2em; 
+  position: absolute;
+  top: -20px; 
+  left: 50%;
+  transform: translateX(-50%); 
+  color: gold; 
 }
