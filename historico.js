@@ -105,22 +105,11 @@ function filtrarVencedor() {
     const historico = JSON.parse(localStorage.getItem('historico')) || [];
 
     const historicoFiltrado = historico.filter(comparacao => {
-        const vencedor = comparacao.vencedor;
-        return vencedor && vencedor.nome.toLowerCase().includes(filtroInput);
-    });
+        const piloto1 = comparacao.dadosPiloto1;
+        const piloto2 = comparacao.dadosPiloto2;
 
-    exibirHistorico(historicoFiltrado); 
-}
-
-
-function filtrarVencedor() {
-    const filtroInput = document.getElementById("filtro-input").value.toLowerCase();
-    const historico = JSON.parse(localStorage.getItem('historico')) || [];
-
-    const historicoFiltrado = historico.filter(comparacao => {
-        const vencedor = (comparacao.dadosPiloto1.vitorias > comparacao.dadosPiloto2.vitorias) ? comparacao.dadosPiloto1 :
-                         (comparacao.dadosPiloto2.vitorias > comparacao.dadosPiloto1.vitorias) ? comparacao.dadosPiloto2 : null;
-        
+        const vencedor = (piloto1.vitorias > piloto2.vitorias) ? piloto1 :
+                         (piloto2.vitorias > piloto1.vitorias) ? piloto2 : null;
 
         if (filtroInput === "") {
             return true;
@@ -130,11 +119,11 @@ function filtrarVencedor() {
             return vencedor === null;
         }
 
-    
-        return vencedor && vencedor.nome.toLowerCase().includes(filtroInput);
+        return piloto1.nome.toLowerCase().includes(filtroInput) || 
+               piloto2.nome.toLowerCase().includes(filtroInput);
     });
 
-    exibirHistorico(historicoFiltrado); 
+    exibirHistorico(historicoFiltrado);
 }
 
 document.getElementById("filtro-btn").addEventListener("click", filtrarVencedor);
