@@ -53,10 +53,13 @@ function criaCardComparacaohistorico(dados1, dados2) {
 
         container.appendChild(cardVencedor);
     } else {
-        const empate = document.createElement("div");
-        empate.classList.add("card", "empate");
-        empate.textContent = "Empate! Ambos os pilotos têm o mesmo número de vitórias.";
-        container.appendChild(empate);
+        const cardEmpate = document.createElement("div");
+        cardEmpate.classList.add("card", "empate");
+    
+        const textoEmpate = document.createElement("p");
+        textoEmpate.textContent = "Empate! Ambos os pilotos têm o mesmo número de vitórias.";
+        cardEmpate.appendChild(textoEmpate);
+        container.appendChild(cardEmpate);
     }
 }
 
