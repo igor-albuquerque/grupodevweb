@@ -175,6 +175,7 @@ document.getElementById("limpar-tudo").addEventListener("click", () => {
     document.getElementById("container").innerHTML = "";
     document.getElementById("piloto_nome1").value = "";
     document.getElementById("piloto_nome2").value = "";
+    spinner.style.display = "none";
 });
 
 document.addEventListener("keydown", function (event) {
