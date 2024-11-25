@@ -143,3 +143,12 @@ function ordenarPorVitorias() {
 
 
 document.getElementById("ordenar-vitorias-btn").addEventListener("click", ordenarPorVitorias);
+
+document.addEventListener("keydown", function (event) {
+    if (event.key === "Enter" || event.code === "NumpadEnter") {
+        document.getElementById("filtro-btn").click();
+    }
+    if (event.key === "Delete" || event.code === "NumpadDelete") {
+        document.getElementById("limpar-historico").click();
+    }
+});
